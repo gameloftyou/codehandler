@@ -1,7 +1,7 @@
 /**
  * name: CodeHandler
  * coder: gameloftyou
- * version: v1.0.6
+ * version: v1.0.0
  */
 
 var contents = test_editor.getContent().replace(/&nbsp;/g,' ');
