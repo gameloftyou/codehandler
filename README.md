@@ -1,7 +1,7 @@
 codehandler
 ================
 
-<b>Description2 33</b>:<br />
+<b>Description</b>:<br />
 &nbsp;&nbsp;&nbsp;&nbsp;A code handler for baidu tieba.
     
 <b>Usage</b>:<br />
