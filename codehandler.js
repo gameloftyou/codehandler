@@ -1,7 +1,7 @@
 /**
  * name: CodeHandler
  * coder: gameloftyou
- * version: v1.0.0
+ * version: v1.0.1
  */
 
 var contents = test_editor.getContent().replace(/&nbsp;/g,' ');
@@ -68,7 +68,9 @@ for(var i=0;i<reparr.length;++i)
     }
 }
 
-test_poster.getPostData = function() {
+if(test_poster.getPostType()=="reply")
+{
+    test_poster.getPostData = function() {
     var t = this.editor.getExtendContent(),
             e = {
                 content : contents
@@ -103,7 +105,37 @@ test_poster.getPostData = function() {
                 $.extend(e, c)
             }
             return e
-};
+    };
+}
+else
+{
+    test_poster.getPostData = function () {
+			var t = this.editor.getExtendContent(),
+			e = {
+				content : contents
+			};
+			if (this.isFrs) {
+				var i = this.getTitle(),
+				o = this.$title.data("prefix");
+				-1 == i.indexOf(o) && (o = ""),
+				i = i.replace(/\u2006/g, ""),
+				i = i.replace(o, ""),
+				e.title = i,
+				e.prefix = o
+			}
+			var s = this.postManager.firePostDataProcess({
+					editorExtendContent : t,
+					context : PosterContext
+				}, e);
+			e = $.extend({}, e, s);
+			var n = this.$root.find(".j_sign_id"),
+			r = this.$root.find(".j_use_signature");
+			return r.tbattr("checked") && n.size() > 0 && n.val() && (e.sign_id = n.val()),
+			e.mouse_pwd = this.MousePwd.report().c,
+			e.mouse_pwd_t = this.MousePwd.time,
+			e.mouse_pwd_isclick = this.MousePwd.MOUSEPWD_CLICK,
+			e
+	};
+}    
 
 test_poster.post();
-
